@@ -2,8 +2,47 @@
 <html>
 <head>
 <title>HTML9 Responsive Boilerstrap JS</title>
+<link rel="stylesheet" href="leaflet/leaflet.css" media="screen">
+<link rel="stylesheet" href="css/style.css" media="screen">
 </head>
 <body>
-<script src="js/html9responsiveboilerstrap.js"></script>
+<div id="map"></div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<!--<script>!window.jQuery && document.write(unescape('%3Cscript src="js/libs/jquery-1.4.2.js"%3E%3C/script%3E'))</script>-->
+
+<script src="leaflet/leaflet-src.js"></script>
+<script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.2.0"></script>
+<script>
+  $(document).ready(function(){
+    var map = L.map('map', {
+        center: [53.201210, 5.813510],
+        zoom: 13
+    });
+    $.get('track.json', function(data) {
+      coords = []
+      for (i in data[0]['segments'][0]){
+        i = data[0]['segments'][0][i];
+        coords.push([i.lan,i.lon])
+      };
+      console.log(coords);
+      bla = { "type": "FeatureCollection",
+              "features": [
+                { "type": "Feature",
+                  "geometry": {
+                    "type": "LineString",
+                    "coordinates": coords,
+                    "properties": {"prop0": "value0"}
+                  }
+                }
+              ]
+      }
+      console.log(bla);
+
+      L.geoJson(bla).addTo(map);
+    });
+    var layer = new L.StamenTileLayer("toner");
+    map.addLayer(layer);
+  })
+</script>
 </body>
 </html>
