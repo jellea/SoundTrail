@@ -9,3 +9,5 @@ map and use that route as a timeline for the audio. While the audio
 plays, you'll see the location pin moving over the route. You're also
 able to click somewhere on the route to continue playing the audio at
 the given time.
+
+![Screenshot](http://f.cl.ly/items/371s3A2X16280m3k260h/Screen%20Shot%202013-01-11%20at%206.32.49%20PM.png)
