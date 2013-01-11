@@ -1,5 +1,9 @@
 /*global L: true */
 
+// Original file: https://github.com/shramov/leaflet-plugins/blob/master/layer/vector/GPX.js
+// Credits go to: Pavel Shramov
+
+
 L.GPX = L.FeatureGroup.extend({
   initialize: function(gpx, options) {
     L.Util.setOptions(this, options);
@@ -66,7 +70,7 @@ L.GPX = L.FeatureGroup.extend({
 
     if (!layers.length) return;
     var layer = layers[0];
-    if (layers.length > 1) 
+    if (layers.length > 1)
       layer = new L.FeatureGroup(layers);
     //if (!named) this.parse_name(xml, layer);
     return layer;
@@ -116,6 +120,9 @@ L.GPX = L.FeatureGroup.extend({
       coords.push(ll);
     }
     var l = [new L.Polyline(coords, options)];
+    this.on('click', function(e) {
+      console.log(e); // e is an event object (MouseEvent in this case)
+    });
     this.fire('addline', {line:l})
     return l;
   },
